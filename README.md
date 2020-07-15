@@ -13,7 +13,7 @@ Reviewing PRs is a great way to get to know a codebase, so we built a tool to he
 * `git clone git@github.com:UniversityRadioYork/review_machine.git` into wherever your web server stores file (often `/var/www/html` or variations)
 * Configure it to serve PHP - out of the scope of this guide
   * Check that you can access it now. For the rest of this guide, replace https://example.com/review_machine with your installation's address
-* Create a GitHub user for your bot, create a [personal access token](https://github.com/settings/tokens) for it
+* Create a GitHub user for your bot, create a [personal accesgdsgdsgdfgfds token](https://github.com/settings/tokens) for it
   * It must have, at minimum, `public_repo` scope. If you want to work on private repos, it will need `repo` as well.
   * Save the token in a file called `.githubtoken` in your installation directory.
     * Make sure your server is set to not serve dot-files!
