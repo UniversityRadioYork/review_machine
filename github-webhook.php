@@ -69,14 +69,19 @@ switch ($event_type) {
         echo 'pong';
         exit(0);
     case 'pull_request':
+        $repo = $payload['pull_request']['base']['repo']['full_name'];
+        $sender_username = $payload['pull_request']['user']['login'];
+        $pull_number = $payload['pull_request']['number'];
+        $action = $payload['action'];
+
+        if (!( $action === 'ready_for_review' || ( $action === 'opened' && !$payload['pull_request']['draft'] ) )) {
+            _log('INFO', "Action $action (for PR $repo#$pull_number), ignoring");
+            exit(0);
+        }
         if (!file_exists('.githubtoken')) {
             oh_no_everythings_dead('Missing GitHub access token');
         }
         $githubtoken = trim(file_get_contents('.githubtoken'));
-
-        $repo = $payload['pull_request']['base']['repo']['full_name'];
-        $sender_username = $payload['pull_request']['user']['login'];
-        $pull_number = $payload['pull_request']['number'];
 
         $db = DB::getInstance();
 
