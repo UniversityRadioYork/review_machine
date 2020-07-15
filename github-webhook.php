@@ -126,7 +126,7 @@ switch ($event_type) {
         }
 
         $comment = <<<EOF
-Thank you for this PR, @$$sender_username!
+Thank you for this PR, @$sender_username!
 
 @$reviewer, would you mind reviewing this pull request, please? Feel free to ask anyone for help if you're not quite sure what you're doing.
 EOF;
