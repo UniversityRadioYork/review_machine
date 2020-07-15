@@ -1,0 +1,7 @@
+.idea/
+vendor/
+*.iml
+*.sqlite3
+.githubtoken
+.githubsecret
+.review_machine_test_mode

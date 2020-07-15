@@ -1,0 +1,17 @@
+{
+  "name": "universityradioyork/review_machine",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Marks Polakovs",
+      "email": "marks.polakovs@ury.org.uk"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "7.0",
+    "ext-json": "*",
+    "ext-sqlite3": "*"
+  }
+}
