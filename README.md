@@ -25,4 +25,4 @@ Reviewing PRs is a great way to get to know a codebase, so we built a tool to he
 
 ## Copyright
 
-Copyright &copy; 2020 Marks Polakovs / University Radio York. Licensed under the MIT license.
+Copyright &copy; 2020 Marks Polakovs / University Radio York. Licensed under the BSD 3-Clause license.
