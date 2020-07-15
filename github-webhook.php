@@ -126,9 +126,9 @@ switch ($event_type) {
         }
 
         $comment = <<<EOF
-Thank you for this PR, @$sender_username!
+Thank you for this pull request, @$sender_username!
 
-@$reviewer, would you mind reviewing this pull request, please? Feel free to ask anyone for help if you're not quite sure what you're doing.
+@$reviewer, would you mind reviewing this PR, please? Feel free to ask anyone for help if you're not quite sure what you're doing.
 EOF;
 
         $addCommentResponse = $client->request('POST', "https://api.github.com/repos/$repo/issues/$pull_number/comments", [
