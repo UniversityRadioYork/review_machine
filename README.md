@@ -23,6 +23,11 @@ Reviewing PRs is a great way to get to know a codebase, so we built a tool to he
     * Save this secret in a file called `.githubsecret` in your installation directory.
 * Figure out a way of authenticating users, and rip out the horrible mess that is `_auth.php` with your own implementation. It must set a variable called `$memberid`, unique to each user using your Review Machine.
 
+## TODO
+
+ * Databases other than SQLite
+ * More flexible authz
+
 ## Copyright
 
 Copyright &copy; 2020 Marks Polakovs / University Radio York. Licensed under the MIT license.
