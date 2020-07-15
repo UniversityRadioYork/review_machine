@@ -78,6 +78,12 @@ switch ($event_type) {
             _log('INFO', "Action $action (for PR $repo#$pull_number), ignoring");
             exit(0);
         }
+
+        if (!empty($payload['pull_request']['requested_reviewers']) || !empty($payload['pull_request']['requested_teams'])) {
+            _log('INFO', "PR $repo#$pull_number already has a reviewer(s), ignoring");
+            exit(0);
+        }
+
         if (!file_exists('.githubtoken')) {
             oh_no_everythings_dead('Missing GitHub access token');
         }
