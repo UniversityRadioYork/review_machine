@@ -106,7 +106,7 @@ switch ($event_type) {
 
         $client = new \GuzzleHttp\Client();
 
-        $addReviewerResponse = $client->request('POST', "https://api.github.com/repos/$repo/pulls/$pull_number/requested_reviews", [
+        $addReviewerResponse = $client->request('POST', "https://api.github.com/repos/$repo/pulls/$pull_number/requested_reviewers", [
             'json' => [
                 'reviewers' => [$reviewer]
             ],
