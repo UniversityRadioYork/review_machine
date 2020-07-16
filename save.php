@@ -33,10 +33,17 @@ if (empty($_POST['github_username'])) {
 /** @noinspection PhpUndefinedVariableInspection */
 $db->setGithubUsername($memberid, $_POST['github_username']);
 
-$db->updateMemberProjects(
-    $memberid,
-    array_keys($_POST['projects'], 1)
-);
+if (isset($_POST['projects'])) {
+    $db->updateMemberProjects(
+        $memberid,
+        array_keys($_POST['projects'], 1)
+    );
+} else {
+    $db->updateMemberProjects(
+        $memberid,
+        []
+    );
+}
 
 header('HTTP/1.1 302 Found');
 header('Location: index.php?message=success');
