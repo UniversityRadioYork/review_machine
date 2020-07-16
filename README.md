@@ -19,7 +19,7 @@ Reviewing PRs is a great way to get to know a codebase, so we built a tool to he
     * Make sure your server is set to not serve dot-files!
     * Also, while you're at it, configure it to not serve `.sqlite3` files either. If you're using nginx, the following config snippet should do it:
 ```nginx
-location ~ (^\.|\.sqlite3$) {
+location ~ (^/\.|\.sqlite3$) {
   deny all;
 }
 ```
