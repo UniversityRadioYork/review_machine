@@ -17,6 +17,12 @@ Reviewing PRs is a great way to get to know a codebase, so we built a tool to he
   * It must have, at minimum, `public_repo` scope. If you want to work on private repos, it will need `repo` as well.
   * Save the token in a file called `.githubtoken` in your installation directory.
     * Make sure your server is set to not serve dot-files!
+    * Also, while you're at it, configure it to not serve `.sqlite3` files either. If you're using nginx, the following config snippet should do it:
+```nginx
+location ~ (^\.|\.sqlite3$) {
+  deny all;
+}
+```
 * Create a webhook on GitHub - either for your entire org or for individual repos. It must receive at least pull request events, other event types will be ignored.
   * The hook's address must be https://example.com/review_machine/github-webhook.php
   * Generate a secure secret - for example, by running `php -r "echo bin2hex(random_bytes(20));"`
