@@ -112,23 +112,30 @@ switch ($event_type) {
 
         $client = new \GuzzleHttp\Client();
 
-        $addReviewerResponse = $client->request('POST', "https://api.github.com/repos/$repo/pulls/$pull_number/requested_reviewers", [
-            'json' => [
-                'reviewers' => [$reviewer]
-            ],
-            'headers' => [
-                'Accept' => 'application/vnd.github.v3+json',
-                'Authorization' => "token $githubtoken"
-            ]
-        ]);
-
-        if ($addReviewerResponse->getStatusCode() === 422) {
-            // they're not an org member. okay.
-            _log('INFO', "Tried to request review for $repo#$pull_number from $reviewer, but they're not a member");
-        } else if ($addReviewerResponse->getStatusCode() !== 201) {
-            $status = $addReviewerResponse->getStatusCode();
-            $body = $addReviewerResponse->getBody()->getContents();
-            _log('ERROR', "Failed to request review for $repo#$pull_number from $reviewer [$status]:\n\n$body\n");
+        try {
+            $addReviewerResponse = $client->request('POST', "https://api.github.com/repos/$repo/pulls/$pull_number/requested_reviewers", [
+                'json' => [
+                    'reviewers' => [$reviewer]
+                ],
+                'headers' => [
+                    'Accept' => 'application/vnd.github.v3+json',
+                    'Authorization' => "token $githubtoken"
+                ]
+            ]);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            if ($e->hasResponse()) {
+                $res = $e->getResponse();
+                if ($res->getStatusCode() === 422) {
+                    // they're not an org member. okay.
+                    _log('INFO', "Tried to request review for $repo#$pull_number from $reviewer, but they're not a member");
+                } else if ($res->getStatusCode() !== 201) {
+                    $status = $res->getStatusCode();
+                    $body = $res->getBody()->getContents();
+                    _log('ERROR', "Failed to request review for $repo#$pull_number from $reviewer [$status]:\n\n$body\n");
+                }
+            } else {
+                _log('ERROR', "Failed to request review for $repo#$pull_number from $reviewer, but it exploded for some unknown reason\n");
+            }
         }
 
         $comment = <<<EOF
